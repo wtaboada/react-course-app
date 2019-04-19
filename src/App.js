@@ -7,20 +7,18 @@ import CharComponent from './CharComponent/CharComponent';
 class App extends Component {
   state = {
     input: '',
-    inputLength: 0,
   }
 
   changeInputLengthHandler = (event) => {
     this.setState({
-      input: event.target.value,
-      inputLength: event.target.value.length
+      input: event.target.value
     })
   }
 
   removeCharHandler = (index) => {
     const newInput = this.state.input.split('')
     newInput.splice(index, 1);
-    this.setState({input: newInput.join(''), inputLength: newInput.length});
+    this.setState({input: newInput.join('')});
   }
 
   render() {
@@ -28,8 +26,8 @@ class App extends Component {
       <div className="App">
         <h1>List and Conditionals Assignment</h1>
         <input type="text" onChange={this.changeInputLengthHandler} value={this.state.input}/>
-        <p>Input length: {this.state.inputLength}</p>
-        <ValidationComponent inputLength={this.state.inputLength}/>
+        <p>Input length: {this.state.input.length}</p>
+        <ValidationComponent inputLength={this.state.input.length}/>
         {
           this.state.input.split('').map((char, index) => {
             return <CharComponent 
